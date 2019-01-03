@@ -1,3 +1,7 @@
+-- Simple implementation of the hangman game.
+-- You can pick a secret sentence and pick a number of maximum tries.
+-- This game is very IO intensive, comparing to the pure parts of the program.
+
 hangman :: IO ()
 hangman = do {
     secret <- getSecretWord;
@@ -25,28 +29,28 @@ play secret letters chances = do {
 
 getSecretWord :: IO String
 getSecretWord = do {
-   putStrLn "Pick a secret word or phrase:";
-   xs <- readword;
-   return xs
-    }
+        putStrLn "Pick a secret word or sentence:";
+        xs <- readword;
+        return xs
+        }
 
 getChances :: IO Int
 getChances = do {
-    putStrLn "How many chances does the player have?";
-    s <- getLine;
-    return (read s :: Int)
-    }
+            putStrLn "How many chances does the player have?";
+            s <- getLine;
+            return (read s :: Int)
+            }
 
 printSpace:: Int -> IO ()
 printSpace n = do {
-    if n > 0 then
-        do { 
-            putStrLn "";
-            printSpace (n - 1)
-        }
-    else
-        putStrLn ""
-}
+            if n > 0 then
+                do { 
+                    putStrLn "";
+                    printSpace (n - 1)
+                }
+            else
+                putStrLn ""
+            }
 
 readChar :: IO Char
 readChar = do {
@@ -64,8 +68,6 @@ formattedLetters:: [Char] -> String
 formattedLetters [x] = [x]
 formattedLetters (x:xs) = x : ',' : formattedLetters xs
 formattedLetters _ = ""
-
-
 
 match :: String -> [Char] -> String
 match secret letters = [if elem x letters || x == ' ' then x else '_' | x <- secret]
