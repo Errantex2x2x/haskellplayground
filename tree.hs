@@ -7,7 +7,6 @@ instance Eq (YesNo elem) where
     (==) (Yes _ _) (Yes _ _) = True
     (==) No No               = True
     (==) _ _                 = False
-    (/=) a b                 = not $ (==) a b
 
 test :: Tree Int
 test = Branch 5 (Branch 4 (Branch 3 Leaf Leaf) Leaf) (Branch 1 Leaf Leaf)
